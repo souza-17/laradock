@@ -21,7 +21,75 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+
+
+
+    <?php
+
+        use Khill\Lavacharts\Lavacharts;
+
+        $lava = new Lavacharts; // See note below for Laravel
+
+        $population = $lava->DataTable();
+
+        $population->addDateColumn('Year')
+                ->addNumberColumn('Number of People')
+                ->addRow(['2006', 623452])
+                ->addRow(['2007', 685034])
+                ->addRow(['2008', 716845])
+                ->addRow(['2009', 757254])
+                ->addRow(['2010', 778034])
+                ->addRow(['2011', 792353])
+                ->addRow(['2012', 839657])
+                ->addRow(['2013', 842367])
+                ->addRow(['2014', 873490]);
+
+        $lava->AreaChart('Population', $population, [
+            'title' => 'Population Growth',
+            'legend' => [
+                'position' => 'in'
+            ]
+        ]);
+    
+        // $lava->render('AreaChart', 'Population', 'pop_div') 
+
+    ?>
+
+        <div id="pop_div"></div>
+        // With the lava object
+        <?= $lava->render('AreaChart', 'Population', 'pop_div') ?>
+
+    <!-- <div id="stocks-chart"></div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
@@ -127,6 +195,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </body>
 </html>
